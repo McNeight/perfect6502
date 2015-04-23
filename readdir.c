@@ -16,7 +16,7 @@ DIR *opendir(const char *name)
 	DIR *ret = NULL;
 	char name2[MAX_PATH];
 	WIN32_FIND_DATAA findData;
-	
+
 	if (strlen(name) >= MAX_PATH - 2 - 1)
 	{
 		errno = ENAMETOOLONG;

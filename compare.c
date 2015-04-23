@@ -118,7 +118,7 @@ perfect_measure_instruction()
 			 * the test instruction MIGHT be done
 			 */
 			state = STATE_FIRST_FETCH;
-		} 
+		}
 
 		if (state == STATE_DURING_INSTRUCTION) {
 			instr_rw[c] = r_w;
@@ -129,7 +129,7 @@ perfect_measure_instruction()
 
 		if (ab == TRIGGER1) {
 			state = STATE_DURING_INSTRUCTION; /* we're done writing the trigger value; now comes the instruction! */
-		} 
+		}
 		if (ab == TRIGGER3) {
 			break; /* we're done dumping the CPU state */
 		}
