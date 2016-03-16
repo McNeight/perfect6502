@@ -28,7 +28,7 @@ void clear_screen() {
 
   if( (get_console_info(&hstd_out, &dummy1, &size)) == -1 )
     return;
-  
+
   FillConsoleOutputCharacter(hstd_out, ' ', size, upper_left, &dummy2);
   SetConsoleCursorPosition(hstd_out, upper_left);
 #else /* ANSI */
@@ -222,6 +222,72 @@ void set_color(int c)
     SetConsoleTextAttribute(h, info.wAttributes);
 
 #else /* ANSI */
-  /* TODO */
+    /* this is far from perfect [phf] */
+    switch (c)
+    {
+    case COLOR_WHITE:
+        fputs("\033[37;1m", stdout); /* same as GREY3 */
+        break;
+
+    case COLOR_RED:
+        fputs("\033[31m", stdout);
+        break;
+
+    case COLOR_GREEN:
+        fputs("\033[32m", stdout);
+        break;
+
+    case COLOR_BLUE:
+        fputs("\033[34m", stdout);
+        break;
+
+    case COLOR_BLACK:
+        fputs("\033[30m", stdout);
+        break;
+
+    case COLOR_PURPLE:
+        fputs("\033[35m", stdout);
+        break;
+
+    case COLOR_YELLOW:
+        fputs("\033[33;1m", stdout);
+        break;
+
+    case COLOR_CYAN:
+        fputs("\033[36m", stdout);
+        break;
+
+    case COLOR_ORANGE:
+        fputs("\033[33m", stdout); /* ORANGE on Windows only? */
+        break;
+
+    case COLOR_BROWN:
+        fputs("\033[33m", stdout); /* closest thing on Linux? */
+        break;
+
+    case COLOR_LTRED:
+        fputs("\033[31;1m", stdout);
+        break;
+
+    case COLOR_GREY1:
+        fputs("\033[30;1m", stdout);
+        break;
+
+    case COLOR_GREY2:
+        fputs("\033[37m", stdout);
+        break;
+
+    case COLOR_LTGREEN:
+        fputs("\033[32;1m", stdout);
+        break;
+
+    case COLOR_LTBLUE:
+        fputs("\033[34;1m", stdout);
+        break;
+
+    case COLOR_GREY3:
+        fputs("\033[37;1m", stdout); /* same as WHITE */
+        break;
+    }
 #endif /* _WIN32 */
 }

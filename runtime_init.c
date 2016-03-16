@@ -2,7 +2,7 @@
 
 #include "perfect6502.h"
 /* XXX hook up memory[] with RAM[] in runtime.c */
- 
+
 /************************************************************
  *
  * Interface to OS Library Code / Monitor
@@ -44,7 +44,7 @@ init_monitor()
 	memory[0xf000] = 0x20;
 	memory[0xf001] = 0x94;
 	memory[0xf002] = 0xE3;
-	
+
 	memory[0xfffc] = 0x00;
 	memory[0xfffd] = 0xF0;
 }

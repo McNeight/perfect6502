@@ -130,7 +130,7 @@ typedef struct {
 static inline void
 bitmap_clear(bitmap_t *bitmap, count_t count)
 {
-	bzero(bitmap, WORDS_FOR_BITS(count)*sizeof(bitmap_t));
+	memset(bitmap, 0, WORDS_FOR_BITS(count)*sizeof(bitmap_t));
 }
 
 static inline void
@@ -649,6 +649,9 @@ readNodes(state_t *state, int count, nodenum_t *nodelist)
 void
 writeNodes(state_t *state, int count, nodenum_t *nodelist, int v)
 {
-	for (int i = 0; i < 8; i++, v >>= 1)
-	setNode(state, nodelist[i], v & 1);
+	/* was hardedcoded to 8 instead of count but only called with
+	 * a parameter of 8 by writeDataBus anyway? [phf] */
+	for (int i = 0; i < count; i++, v >>= 1) {
+		setNode(state, nodelist[i], v & 1);
+	}
 }

@@ -198,7 +198,7 @@ plugin_on() {
 	replace_vector(VEC_QPLOP, MAGIC_QPLOP, &orig_qplop);
 	replace_vector(VEC_GONE, MAGIC_GONE, &orig_gone);
 	replace_vector(VEC_EVAL, MAGIC_EVAL, &orig_eval);
-	
+
 	plugin = 1;
 }
 
@@ -445,7 +445,7 @@ printf("CHROUT: %d @ %x,%x,%x,%x\n", A, a, b, c, d);
 		C = 0;
 		return;
 	}
-	
+
 #if 0
 	printf("CHROUT: %c (%d)\n", A, A);
 #else
@@ -593,7 +593,7 @@ LOAD() {
 
 			RAM[old_memp] = (memp) & 0xFF;
 			RAM[old_memp+1] = (memp) >> 8;
-			
+
 			if ( !(dirp = opendir(".")) )
 				goto device_not_present;
 			while ((dp = readdir(dirp))) {
@@ -748,7 +748,7 @@ SETTIM() {
     time_t  now = time(0);
     struct tm       bd;
     struct timeval  tv;
-    
+
     localtime_r(&now, &bd);
 
     bd.tm_sec       = seconds%60;
@@ -757,7 +757,7 @@ SETTIM() {
 
     tv.tv_sec   = mktime(&bd);
     tv.tv_usec  = (jiffies % 60) * (1000000/60);
-    
+
     settimeofday(&tv, 0);
 #endif
 }
@@ -775,16 +775,16 @@ RDTIM() {
     time_t  now = time(0);
     struct tm       bd;
     struct timeval  tv;
-    
+
     localtime_r(&now, &bd);
     gettimeofday(&tv, 0);
-    
+
     jiffies = ((bd.tm_hour*60 + bd.tm_min)*60 + bd.tm_sec)*60 + tv.tv_usec / (1000000/60);
 #endif
     Y   = (unsigned char)(jiffies/65536);
     X   = (unsigned char)((jiffies%65536)/256);
     A   = (unsigned char)(jiffies%256);
-    
+
 }
 
 /* STOP */
@@ -827,7 +827,7 @@ GETIN() {
 /* CLALL */
 static void
 CLALL() {
-    int i;
+    size_t i;
     for (i = 0; i < sizeof(kernal_files)/sizeof(kernal_files[0]); ++i) {
         if (kernal_files[i]) {
             fclose(kernal_files[i]);
@@ -911,7 +911,7 @@ kernal_dispatch() {
 		case MAGIC_QPLOP:	new_pc = plugin_qplop(); PUSH_WORD(new_pc? new_pc-1:orig_qplop-1); break;
 		case MAGIC_GONE:	new_pc = plugin_gone(); PUSH_WORD(new_pc? new_pc-1:orig_gone-1); break;
 		case MAGIC_EVAL:	new_pc = plugin_eval(); PUSH_WORD(new_pc? new_pc-1:orig_eval-1); break;
-		
+
 		case MAGIC_CONTINUATION: /*printf("--CONTINUATION--\n");*/ return 0;
 
 #if 0

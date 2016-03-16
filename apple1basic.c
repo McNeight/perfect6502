@@ -3,7 +3,7 @@
 #include <sys/stat.h>
 
 #include "perfect6502.h"
- 
+
 /************************************************************
  *
  * Interface to OS Library Code / Monitor
